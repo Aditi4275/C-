@@ -1,89 +1,37 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void NSL(vector<int> &arr,int n,vector<int>&left){
-   
-    stack<pair<int,int>>s;
-    int pseudo_index = -1;
-
-    for(int i=0;i<n;i++){
-        if(s.empty())
-            left.push_back(pseudo_index);
-        else if(s.top().first < arr[i] )
-            left.push_back(s.top().second);
-        else{
-            while(!s.empty() && s.top().first >= arr[i])
-                s.pop();
-            if(s.empty())
-                left.push_back(pseudo_index);
-            else
-                left.push_back(s.top().second);
+//Subset Sum Problem
+bool subset_sum(int arr[],int n,int sum){
+    bool t[n+1][sum+1];
+    //initialization
+    for(int i=0;i<n+1;i++){
+        for(int j=0;j<sum+1;j++){
+            if(i == 0)
+                t[i][j] = false;
+            else if( j == 0)
+                t[i][j] = true;
         }
-        s.push({arr[i],i});
     }
-    
-}
-
-void NSR(vector<int>&arr,int n,vector<int>&right){
-    
-    stack<pair<int,int>>s;
-    int pseudo_index = n;
-
-    for(int i=n-1;i>=0;i--){
-        if(s.empty())
-            right.push_back(pseudo_index);
-        else if(s.top().first < arr[i] )
-            right.push_back(s.top().second);
-        else{
-            while(!s.empty() && s.top().first >= arr[i])
-                s.pop();
-            if(s.empty())
-                right.push_back(pseudo_index);
-            else
-                right.push_back(s.top().second);
+    for(int i=1;i<n+1;i++){
+        for(int j=1;j<sum+1;j++){
+            if(arr[i-1] <= j){
+                t[i][j] = (t[i-1][j-arr[i-1]]) || (t[i-1][j]);
+            }
+            else{
+                t[i][j] = t[i-1][j];
+            }
         }
-        s.push({arr[i],i});
     }
-    reverse(right.begin(),right.end());
-}
-
-int area(vector<int> v,int n){
-    vector<int>right;
-    vector<int>left;
-    NSL(v,n,left);
-    NSR(v,n,right);
-    int width[n];
-
-    int max_area = 0;
-    for (int i = 0; i < n; i++) {
-        int width = right[i] - left[i] - 1;
-        max_area = max(max_area, width * v[i]);
-    }
-    return max_area;
+    return t[n][sum];
 }
 
 int main(){
-    int n,m;
-    cin>>n>>m;
-    int arr[n][m];
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            cin>>arr[i][j];
-        }
+    int n,sum;
+    cin>>n>>sum;
+    int arr[n];
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
     }
-    vector<int>v(m,0);
-    
-    int max_area = 0;
-
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(arr[i][j] == 0)
-                v[j] =0;
-            else{
-                v[j] = v[j]+arr[i][j];
-                max_area = max(max_area,area(v,m));
-            }
-        } 
-    }
-    cout<<max_area;
+    cout<<subset_sum(arr,n,sum)<<endl;
 }
