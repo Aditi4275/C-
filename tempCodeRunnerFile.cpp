@@ -1,37 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-//Subset Sum Problem
-bool subset_sum(int arr[],int n,int sum){
-    bool t[n+1][sum+1];
-    //initialization
-    for(int i=0;i<n+1;i++){
-        for(int j=0;j<sum+1;j++){
-            if(i == 0)
-                t[i][j] = false;
-            else if( j == 0)
-                t[i][j] = true;
-        }
+void set_zero(int i,int j,int n,int m,int &matrix[][m]){
+    //rows
+    for(int k=0;k<m;k++){
+        matrix[i][k] = 0;
     }
-    for(int i=1;i<n+1;i++){
-        for(int j=1;j<sum+1;j++){
-            if(arr[i-1] <= j){
-                t[i][j] = (t[i-1][j-arr[i-1]]) || (t[i-1][j]);
-            }
-            else{
-                t[i][j] = t[i-1][j];
-            }
-        }
+    //cols
+    for(int l=0;l<n;l++){
+        matrix[l][j] = 0;
     }
-    return t[n][sum];
+    
 }
-
-int main(){
-    int n,sum;
-    cin>>n>>sum;
-    int arr[n];
-    for(int i = 0; i < n; i++) {
-        cin >> arr[i];
+int get_zero(int n,int m, int arr[][m]){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            set_zero(i,j,n,m,arr[][m]);
+        }
     }
-    cout<<subset_sum(arr,n,sum)<<endl;
+    return arr[][];
+}
+int main(){
+    int n,m;
+    cin>>n>>m;
+    int arr[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>arr[i][j];
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cout<<arr[i][j]<<" ";
+        }
+    }
 }
