@@ -32,7 +32,7 @@ void pascal_triangle(int n){
     }
 }
 // Optimized Pascal triangle
-vector<int> generate_rows(int n){
+void generate_rows(int n){
     long long res =1;
     vector<int>ans;
     ans.push_back(1);
@@ -40,13 +40,12 @@ vector<int> generate_rows(int n){
     for(int i=1;i<n;i++){
         res = res*(n-i);
         res = res/i;
-        ans.push_back(res);
     }
     return ans;
 }
 
-vector<vector<int>> pascal_tri(int n){
-    vector<vector<int>> ans;
+vactor<vector<int>> pascal_tri(int n){
+    vactor<vector<int>> ans;
     for(int i=1;i<=n;i++){
         ans.push_back(generate_rows(i));
     }
