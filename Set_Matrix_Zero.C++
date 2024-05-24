@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+//Set Matrix Zero
 void set_zero(int i,int j,int n,int m,vector<vector<int>>& arr){
     //rows
     for(int k=0;k<m;k++){
@@ -13,7 +13,7 @@ void set_zero(int i,int j,int n,int m,vector<vector<int>>& arr){
     
 }
 void get_zero(int n,int m, vector<vector<int>>& arr){
-    
+
     vector<pair<int,int>>v;
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
