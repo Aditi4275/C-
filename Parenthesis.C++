@@ -9,9 +9,13 @@ bool parenthesis(string s){
         if(s[i] == '(' || s[i] == '[' || s[i] == '{')
             st.push(s[i]);
         else{
+            if(st.empty())
+                return false;
             char curr = st.top();
             if((s[i] == ')' && curr == '(') || (s[i] == ']' && curr == '[') || (s[i] == '}' && curr == '{'))
                 st.pop();
+            else    
+                return false;
         }
     }
     return st.empty();
