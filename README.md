@@ -1,0 +1,1 @@
+This repository contains solutions of Striver's DSA sheet in C++ language. It contains optimised time and space complexity solutions to  all the problems stated. This may include problems of various topics like arrays, tries, graphs, stacks, strings, queues, recurssion, dynamic programming etc.
