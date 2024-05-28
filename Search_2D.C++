@@ -32,11 +32,11 @@ bool search_matrix(vector<vector<int>>arr,int target){
     int m = arr[0].size();
 
     int left = 0;
-    int right = (n*m)-1;
+    int right = (n*m)-1;            // converting 2D to 1D array
     while(left<=right){
         int mid = (left+right)/2;
-        int row = mid/m;
-        int col = mid%m;
+        int row = mid/m;             //calculating row index
+        int col = mid%m;             // calculating col index
         if(arr[row][col] == target)
             return true;
         else if(arr[row][col] > target)
