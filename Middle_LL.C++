@@ -55,8 +55,6 @@ int middle(node *head){
         temp = temp->next;
         half--;
     }
-    //if(count %2 == 0)
-     //   temp = temp->next;
 
     return temp->data;
 
