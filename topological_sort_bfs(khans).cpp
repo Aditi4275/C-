@@ -6,7 +6,7 @@ vector<vector<int>>graph;
 vector<int>indegree;;
 vector<int>topo;
 
-void khans(){
+void khan(){
     queue<int>q;
     for(int i=1;i<=n;i++){
         if(indegree[i]==0){
@@ -19,7 +19,7 @@ void khans(){
         q.pop();
         topo.push_back(cur);
         for(auto v: graph[cur]){
-            indegree--;
+            indegree[v]--;
             if(indegree[v]==0){
                 q.push(v);
             }
@@ -58,7 +58,7 @@ int main(){
         graph[u].push_back(v);
         indegree[v]++;
     }
-    kahn();
+    khan();
     if(topo.size() != n){  // if there is a cycle then all nodes are not inserted in topo
         cout<<"There is a cycle"<<"\n";
     }
